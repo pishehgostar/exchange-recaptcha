@@ -1,0 +1,24 @@
+{
+    "name": "pishehgostar/exchange-recaptcha",
+    "autoload": {
+        "psr-4": {
+            "Pishehgostar\\ExchangeRecaptcha\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pishehgostar\\ExchangeRecaptcha\\MainServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "hossein",
+            "email": "hosseinasadian442@gmail.com"
+        }
+    ],
+    "require": {
+        "google/cloud-recaptcha-enterprise": "^1.7"
+    }
+}
