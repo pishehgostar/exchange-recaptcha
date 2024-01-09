@@ -1,18 +1,8 @@
 {
     "name": "pishehgostar/exchange-recaptcha",
-    "version": "1.0.0",
-    "autoload": {
-        "psr-4": {
-            "Pishehgostar\\ExchangeRecaptcha\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Pishehgostar\\ExchangeRecaptcha\\MainServiceProvider"
-            ]
-        }
-    },
+    "license": "MIT",
+    "homepage": "https://github.com/pishehgostar/exchange-recaptcha",
+    "keywords": ["captcha"],
     "authors": [
         {
             "name": "hossein",
@@ -21,5 +11,19 @@
     ],
     "require": {
         "google/cloud-recaptcha-enterprise": "^1.7"
-    }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pishehgostar\\ExchangeRecaptcha\\MainServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Pishehgostar\\ExchangeRecaptcha\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
