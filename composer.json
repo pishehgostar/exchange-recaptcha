@@ -1,5 +1,6 @@
 {
     "name": "pishehgostar/exchange-recaptcha",
+    "version": "1.0.0",
     "autoload": {
         "psr-4": {
             "Pishehgostar\\ExchangeRecaptcha\\": "src/"

@@ -13,12 +13,6 @@ class Captcha
     var $img_height = 40;
     var $font_path = '';
     var $font_size = 30;
-    var $expiration = 7200;
-    var $bg_color = '#ffffff';
-    var $border_color = '#996666';
-    var $text_color = '#cc9999';
-    var $grid_color = '#ffb6b6';
-    var $shadow_color = '#aa2200';
 
     private $uuid;
 
@@ -196,7 +190,7 @@ class Captcha
 
     public function saveWord($word)
     {
-        Cache::put('captcha-an-' . $this->uuid,$word,60);
+        Cache::put('captcha-an-' . $this->uuid,$word,config('exchange-recaptcha.alpha_numeric.ttl'));
     }
 
 }

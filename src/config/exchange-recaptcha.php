@@ -19,6 +19,7 @@ return [
 
     'alpha_numeric'=>[
         'input_name'=>'alpha-numeric-response',
-        'secret_key'=>env('EXCHANGE_ALPHANUMERIC_SECRET_KEY', '')
+        'secret_key'=>env('EXCHANGE_ALPHANUMERIC_SECRET_KEY', ''),
+        'ttl'=>'180'//3 minutes
     ]
 ];
