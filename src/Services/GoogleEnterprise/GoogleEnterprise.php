@@ -11,12 +11,12 @@ class GoogleEnterprise extends Recaptcha
 {
     public function loadScript(): void
     {
-        echo '<script src="https://www.google.com/recaptcha/enterprise.js?render=' . config('exchange-recaptcha.google_enterprise.site_key') . '"></script>';
+        echo '<script src="https://www.google.com/recaptcha/enterprise.js?render=' . config('ex-recaptcha.google_enterprise.site_key') . '"></script>';
     }
 
     public function render(string $callback,string $action,string $title,array $attributes): void
     {
-        $site_key = config('exchange-recaptcha.google_enterprise.site_key');
+        $site_key = config('ex-recaptcha.google_enterprise.site_key');
         $attributes = array_merge($attributes,[
             'type'=>'submit',
             'data-callback'=>$callback,
@@ -32,14 +32,14 @@ class GoogleEnterprise extends Recaptcha
 
     public function verify(string $token,string $action):bool
     {
-        $project = config('exchange-recaptcha.google_enterprise.project_name');
+        $project = config('ex-recaptcha.google_enterprise.project_name');
         $recaptchaKey = config('exchange-recaptcha.google_enterprise.site_key');
         // Create the reCAPTCHA client.
         // TODO: Cache the client generation code (recommended) or call client.close() before exiting the method.
-        $path = config('exchange-recaptcha.google_enterprise.credentials_path');
+        $path = config('ex-recaptcha.google_enterprise.credentials_path');
         $credentials = null;
         if (file_exists($path)){
-            $credentials = json_decode(file_get_contents(config('exchange-recaptcha.google_enterprise.credentials_path')),true);
+            $credentials = json_decode(file_get_contents(config('ex-recaptcha.google_enterprise.credentials_path')),true);
         }
         $client = new RecaptchaEnterpriseServiceClient([
             'credentials'=>$credentials
@@ -97,6 +97,6 @@ class GoogleEnterprise extends Recaptcha
 
     public function getInputName():string
     {
-        return config('exchange-recaptcha.google_enterprise.input_name');
+        return config('ex-recaptcha.google_enterprise.input_name');
     }
 }

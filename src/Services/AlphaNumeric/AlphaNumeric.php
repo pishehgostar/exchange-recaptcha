@@ -64,7 +64,7 @@ EOL;
 
     public function getInputName(): string
     {
-        return config('exchange-recaptcha.alpha_numeric.input_name');
+        return config('ex-recaptcha.alpha_numeric.input_name');
     }
 
     public function render(string $callback, string $action,string $title,array $attributes)
@@ -90,7 +90,7 @@ EOL;
     {
         try {
             $decryptedData = json_decode(base64_decode($token),true);
-            $secretKey = config('exchange-recaptcha.alpha_numeric.secret_key');
+            $secretKey = config('ex-recaptcha.alpha_numeric.secret_key');
             if (isset($decryptedData['data']) && isset($decryptedData['iv'])){
                 $decrypted = openssl_decrypt(base64_decode($decryptedData['data']), 'aes-256-cbc', $secretKey, 0, base64_decode($decryptedData['iv']));
                 $decryptedData = json_decode($decrypted, true);

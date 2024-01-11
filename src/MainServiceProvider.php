@@ -14,7 +14,7 @@ class MainServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/exchange-recaptcha.php', 'exchange-recaptcha'
+            __DIR__ . '/config/ex-recaptcha.php', 'ex-recaptcha'
         );
         $this->app->bind(RecaptchaInterface::class, function ($app) {
             return RecaptchaFactory::createInstance();
@@ -30,7 +30,8 @@ class MainServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'ex-recaptcha');
         $this->loadTranslationsFrom(__DIR__ . '/resources/lang','ex-recaptcha');
         $this->publishes([
-            __DIR__ . '/config/exchange-recaptcha.php' => config_path('exchange-recaptcha.php')
+            __DIR__ . '/config/ex-recaptcha.php' => config_path('ex-recaptcha.php'),
+            __DIR__ . '/resources/views'=>base_path('resources/views/vendor/ex-recaptcha'),
         ]);
     }
 }

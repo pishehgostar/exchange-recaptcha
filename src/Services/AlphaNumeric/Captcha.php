@@ -190,7 +190,7 @@ class Captcha
 
     public function saveWord($word)
     {
-        Cache::put('captcha-an-' . $this->uuid,$word,config('exchange-recaptcha.alpha_numeric.ttl'));
+        Cache::put('captcha-an-' . $this->uuid,$word,config('ex-recaptcha.alpha_numeric.ttl'));
     }
 
 }

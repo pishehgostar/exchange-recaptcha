@@ -13,7 +13,7 @@ class RecaptchaFactory
      */
     public static function createInstance(): RecaptchaInterface
     {
-        $selectedService = config('exchange-recaptcha.default');
+        $selectedService = config('ex-recaptcha.default');
         $services = [
             'google_enterprise' => GoogleEnterprise::class,
             'hcaptcha'=>HCaptcha::class,

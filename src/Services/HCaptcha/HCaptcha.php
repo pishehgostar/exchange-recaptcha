@@ -17,7 +17,7 @@ class HCaptcha extends Recaptcha
 
     public function render(string $callback,string $action,string $title,array $attributes): void
     {
-        $site_key = config('exchange-recaptcha.hcaptcha.site_key');
+        $site_key = config('ex-recaptcha.hcaptcha.site_key');
         $attributes = array_merge($attributes,[
             'type'=>'submit',
             'data-callback'=>$callback,
@@ -33,7 +33,7 @@ class HCaptcha extends Recaptcha
 
     public function verify(string $token,string $action):bool
     {
-        $secret_key = config('exchange-recaptcha.hcaptcha.secret_key');
+        $secret_key = config('ex-recaptcha.hcaptcha.secret_key');
         $data = array(
             'secret' => $secret_key,
             'response' => $token
@@ -51,6 +51,6 @@ class HCaptcha extends Recaptcha
 
     public function getInputName():string
     {
-        return config('exchange-recaptcha.hcaptcha.input_name');
+        return config('ex-recaptcha.hcaptcha.input_name');
     }
 }
