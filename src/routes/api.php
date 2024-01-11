@@ -23,7 +23,7 @@ Route::post('captcha',function (){
         $word = Captcha::getCaptchaWord($captcha_key);
         if ($value == $word){
             $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
-            $secretKey = config('exchange-recaptcha.alpha_numeric.secret_key');
+            $secretKey = config('ex-recaptcha.alpha_numeric.secret_key');
 
             $data = [
                 'id'=>$captcha_key,
