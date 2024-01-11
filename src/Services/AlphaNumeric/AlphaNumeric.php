@@ -35,7 +35,8 @@ $(document).ready(function() {
         var callbackFunction = $(this).attr('data-callback');
         var value = $("#captcha-text-" + captcha_key).val();
         var response_input = $("#captcha-response-" + captcha_key);
-        $.post('$save_route',{
+        if (value){
+                 $.post('$save_route',{
             id:captcha_key,
             value:value
         },function (data,status){
@@ -52,7 +53,7 @@ $(document).ready(function() {
         }
             }
         });
-
+        }
     });
 });
 </script>
@@ -66,7 +67,7 @@ EOL;
         return config('exchange-recaptcha.alpha_numeric.input_name');
     }
 
-    public function render(string $callback, string $action)
+    public function render(string $callback, string $action,string $title,array $attributes)
     {
         $captcha = new Captcha([
             'font_path' => public_path('fonts/captcha_code.otf'),
@@ -74,18 +75,14 @@ EOL;
         $inputName = $this->getInputName();
         $uuid = $captcha->getUuid();
         $src = $captcha->createCaptcha();
+        $attributes = array_merge($attributes,[
+            'type'=>'submit',
+            'data-callback'=>$callback,
+            'data-key'=>$uuid,
+        ]);
 
-        $item = <<<EOL
-        <div class="d-flex align-items-center field-item">
-            <div class="d-flex position-relative flex-grow-1">
-                <input id="captcha-text-$uuid" type="text" class="input-bordered flex-grow-1" placeholder="Captcha"/>
-                <span id="captcha-refresh-$uuid" onclick="refreshCaptcha('$uuid')" class="position-absolute right-0 top-0 refresh-captcha fa fa-arrow-circle-left"/>
-            </div>
-            <img id="captcha-img-$uuid" class="mx-1 bdrs-4" alt="captch" src="data:image/jpeg;base64,$src"/>
-            <input id="captcha-response-$uuid" type="hidden" name="$inputName">
-        </div>
-        <button class="an-captcha btn btn-primary btn-block btn-md" data-callback="$callback" data-key="$uuid">Submit</button>
-EOL;
+        $item = view('ex-recaptcha::alpha_numeric.submit',compact('inputName','uuid','src','title','attributes'))->render();
+
         echo $item;
     }
 

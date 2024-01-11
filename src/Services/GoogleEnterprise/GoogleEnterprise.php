@@ -14,17 +14,20 @@ class GoogleEnterprise extends Recaptcha
         echo '<script src="https://www.google.com/recaptcha/enterprise.js?render=' . config('exchange-recaptcha.google_enterprise.site_key') . '"></script>';
     }
 
-    public function render(string $callback,string $action): void
+    public function render(string $callback,string $action,string $title,array $attributes): void
     {
         $site_key = config('exchange-recaptcha.google_enterprise.site_key');
-        echo <<<EOL
-        <button class="g-recaptcha btn btn-primary btn-block btn-md"
-            data-sitekey="$site_key"
-            data-callback="$callback"
-            data-action="$action">
-                Submit
-        </button>
-EOL;;
+        $attributes = array_merge($attributes,[
+            'type'=>'submit',
+            'data-callback'=>$callback,
+            'data-sitekey'=>$site_key,
+            'data-action'=>$action
+        ]);
+        $attributes['class'] = 'g-recaptcha ' . ($attributes['class']??'');
+
+        $item = view('ex-recaptcha::google_enterprise.submit',compact('title','attributes'))->render();
+
+        echo $item;
     }
 
     public function verify(string $token,string $action):bool

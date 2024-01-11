@@ -15,14 +15,20 @@ class HCaptcha extends Recaptcha
         echo "<script src='https://www.hCaptcha.com/1/api.js?hl=".app()->getLocale()."' async defer></script>";
     }
 
-    public function render(string $callback,string $action): void
+    public function render(string $callback,string $action,string $title,array $attributes): void
     {
         $site_key = config('exchange-recaptcha.hcaptcha.site_key');
-        echo <<<EOL
-            <button class="h-captcha btn btn-primary btn-block btn-md" data-sitekey="$site_key" data-callback="$callback" data-size="invisible">
-            Submit
-            </button>
-EOL;;
+        $attributes = array_merge($attributes,[
+            'type'=>'submit',
+            'data-callback'=>$callback,
+            'data-sitekey'=>$site_key,
+            'data-size'=>'invisible'
+        ]);
+        $attributes['class'] = 'h-captcha ' . ($attributes['class']??'');
+
+        $item = view('ex-recaptcha::hcaptcha.submit',compact('title','attributes'))->render();
+
+        echo $item;
     }
 
     public function verify(string $token,string $action):bool

@@ -4,7 +4,7 @@ interface RecaptchaInterface
 {
     public function loadScript();
 
-    public function render (string $callback,string $action);
+    public function render (string $callback,string $action,string $title,array $attributes);
 
     public function verify(string $token,string $action):bool;
 
