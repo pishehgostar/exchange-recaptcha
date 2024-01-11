@@ -33,7 +33,7 @@ class GoogleEnterprise extends Recaptcha
     public function verify(string $token,string $action):bool
     {
         $project = config('ex-recaptcha.google_enterprise.project_name');
-        $recaptchaKey = config('exchange-recaptcha.google_enterprise.site_key');
+        $recaptchaKey = config('ex-recaptcha.google_enterprise.site_key');
         // Create the reCAPTCHA client.
         // TODO: Cache the client generation code (recommended) or call client.close() before exiting the method.
         $path = config('ex-recaptcha.google_enterprise.credentials_path');
